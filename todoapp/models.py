@@ -9,4 +9,9 @@ class movie(models.Model):
     
 class Task(models.Model):
     user=models.ForeignKey(User)
-    tName=models.CharField(max_length=200)
+    tTitle=models.CharField(max_length=200)
+    tDesc=models.CharField(max_length=200)
+    tStatus=models.CharField(max_length=200)
+    tAccess=models.CharField(max_length=200)
+    def __unicode__(self):
+        return self.tTitle

@@ -4,6 +4,7 @@ from django.contrib import admin
 from django.shortcuts import render_to_response
 from django import template
 from todoapp.models import movie
+from todoapp.models import Task
 from django.template.loader import get_template
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
@@ -21,23 +22,28 @@ def index(request):
 def page1(request):
     return render_to_response('home.html')
 
-
-def savetask(request,task_name):
-    #name = request.POST['name']
-    movieObject= movie(name=task_name)
-    if movieObject:
-        movieObject.save()
-        movieObject= movie.objects.all()
-        return render_to_response('home.html',{'pfields':movieObject})
-    #else:
-        #userprofile = UserProfiles(user=request.user, location=location, email=email)
-        #userprofile.save()
-        #return render_to_response('profile.html',{'pfields':userprofile})
+@csrf_exempt
+def savetask(request,user_id):
+    data= json.loads(request.body)
+    print data
+    tTitledata = data.get('tTitle')
+    tDescdata=data.get('tDesc')
+    tStatusdata = data.get('tStatus')
+    tAccessdata=data.get('tAccess')
+    print tAccessdata
+    userObject=User.objects.get(id=user_id)
+    taskObject= Task(user=userObject, tTitle=tTitledata, tDesc=tDescdata, tStatus=tStatusdata, tAccess=tAccessdata)
+    if taskObject:
+        taskObject.save()
+        return tasks(request,user_id)
+   
         
-def movies(request):
+def tasks(request,user_id):
     #name = request.POST['name']
-    movieObject= movie.objects.all()
-    return render_to_response('home.html',{'pfields':movieObject})
+    userObject=User.objects.get(id=user_id)
+    taskObjectPending= Task.objects.filter(user=userObject,tStatus="Pending")
+    taskObjectCompleted=Task.objects.filter(user=userObject,tStatus="Completed")
+    return render_to_response('home.html',{'pendingtasks':taskObjectPending,'u_id':user_id,'completedtasks':taskObjectCompleted})
 
 
 
@@ -48,21 +54,20 @@ def createuser(request,user_name):
 
 @csrf_exempt
 def authenticate_user(request):  
-    print 'hapening',request.body
     data= json.loads(request.body)
     user_name = data.get('user_name')
     passw=data.get('passw')
-    print user_name
-    print passw
-    #passw = request.POST['passw']
     user = authenticate(username=user_name, password=passw)
     if user is not None:
     # the password verified for the user
         if user.is_active:
-            return HttpResponse('active')
-        else:
-            return HttpResponse('non-active')
+            uid=user.id
+            request.session['u_id'] = uid
+            return HttpResponse(uid)
     else:
     # the authentication system was unable to verify the username and password
         return("in-valid")   
-     
+def newtask(request,user_id):
+    #u_id=request.session['u_id']
+    #print u_id
+    return render_to_response('createtask.html',{'u_id':user_id})     

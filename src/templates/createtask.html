@@ -1,0 +1,63 @@
+{% extends "base.html" %} {% block content %}
+
+<div class="container">
+	<div class="col-md-3"></div>
+	<div class="col-md-6">
+		<form action="" method="post" id="addtask" enctype="multi-part/form-data">
+			<h1>New task</h1>
+			<div class="form-group">
+				<label id="lbl" class=" col-md-4 modal-lbl" for="taskname">Task Name</label>
+
+				<div class="col-md-6">
+					<input type="text" class="form-control" id="taskname"
+						name="taskname" placeholder="taskname" required=""/>
+				</div>
+				
+			</div>
+
+
+			<div class="form-group">
+				<label id="lbl" class="col-md-4 modal-lbl" for="taskdesc">Task
+					Description</label>
+				<div class="col-md-6 ">
+					<!-- <div class="col-md-6 modal-lblinput-group"> -->
+					<!--   <span class="input-group-addon">@</span> -->
+					<input type="text" class="form-control" id="taskdesc" name="taskdesc"
+						placeholder="taskdesc" required=""/>
+				</div>
+				
+			</div>
+			<div class="form-group">
+				<label id="lbl" class="col-md-4 modal-lbl" for="taskstatus">Task Status</label>
+				<div class="col-md-6">
+					<input type="text" class="form-control" id="taskstatus" name="taskstatus"
+						placeholder="taskstatus" value="Pending" required=""/>
+				</div>
+				
+			</div>
+			<div class="form-group">
+				<label id="lbl" class="col-md-4 modal-lbl" for="tasskaccess">Task Accessibility</label>
+				<div class="col-md-6">
+					<select id="taskaccess">
+						<option value="private">Private</option>
+						<option value="public">Public</option>
+					</select>
+				</div>
+
+			</div>
+			<input type="hidden" id="uid" value="{{u_id}}">
+			<div class="form-group">
+				
+				<div class="col-md-6">
+					<input type="submit" value="Create Task"/>
+				</div>
+			</div>
+
+		</form>
+		<!-- form -->
+	</div>
+	<div class="col-md-3"></div>
+</div>
+
+
+{% endblock %}

@@ -33,9 +33,34 @@ $(document).ready(function() {
                      "user_name": username, // from form
                      "passw": password                     }),
               success: function(result){
-                if(result=="active")
-                	var url="/tasks/" + username
-                	location.href = url
+                var url="/tasks/" + result
+                location.href = url
+              }
+         });
+         return false; //<---- move it here
+    });
+
+});
+
+$(document).ready(function() {
+    $("#addtask").submit(function(event){
+    	tUid=$('#uid').val()
+    	tTitle=$('#taskname').val()
+    	tDesc=$('#taskdesc').val()
+    	tStatus=$('#taskstatus').val()
+    	tAccess=$('#taskaccess').val()
+         $.ajax({
+              type:"POST",
+              contentType:"application/json",
+              url:"/tasks/create/" + tUid,
+              data: JSON.stringify({
+                     "tTitle": tTitle, // from form
+                     "tDesc": tDesc,
+                     "tStatus":tStatus,
+                     "tAccess":tAccess}),
+              success: function(){
+                var url="/tasks/" + tUid 
+                location.href = url
               }
          });
          return false; //<---- move it here

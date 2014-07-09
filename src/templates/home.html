@@ -1,24 +1,57 @@
-{% extends "base.html" %}
-{% block content %}
+{% extends "base.html" %} {% block content %}
 
-	<div>
-		<div class="container">
-			<div class="col-md-4">
+<div>
+	<div class="container">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<h1>DASHBOARD</h1>
+		</div>
+		<div class="col-md-4">
+			<a class="btn btn-default" href="newtask/{{u_id}}">Add Tasks</a>
+		</div>
+	</div>
+	<div class="container">
+		<div class="col-md-2"></div>
+		<div class="col-md-4">
+			<div class="row">
+				<h3>Pending Tasks</h3>
+				<table class="table table-bordered ">
+					<tr>
+						<th>Id</th>
+						<th>Task Name</th>
+					</tr>
+					{% for Task in pendingtasks %}
+					<tr>
+						<div class="col-md-4">
+						<td>{{Task.id}}</td>
+						<td>{{Task.tTitle}}</td>
+					</tr>
+					{% endfor %}
+				</table>
 			</div>
-			<div class="col-md-4">
-				<h1>DASHBOARD</h1>
-				<table class="table">
-					<tr><th>Id</th><th>Task Name</th></tr>
-					{% for movie in pfields %}
-						<tr>
-							<td> {{movie.id}} </td>
-							<td> {{movie.name}} </td>
-						</tr>
+		</div>
+		<div class="col-md-4">
+			<div class="row">
+				<h3>Completed Tasks</h3>
+				<table class="table table-bordered ">
+					<tr>
+						<th>Id</th>
+						<th>Task Name</th>
+					</tr>
+					{% for Task in completedtasks %}
+					<tr>
+						<td>{{Task.id}}</td>
+						<td>{{Task.tTitle}}</td>
+					</tr>
 					{% endfor %}
 				</table>
 			</div>
 			<div class="col-md-4">
+				<div class="col-md-2"></div>
 			</div>
 		</div>
 	</div>
-{% endblock %}
+
+
+
+	{% endblock %}
