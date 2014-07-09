@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+
+	<div>
+		<div class="container">
+			<div class="col-md-4">
+			</div>
+			<div class="col-md-4">
+				<h1>DASHBOARD</h1>
+				<table class="table">
+					<tr><th>Id</th><th>Task Name</th></tr>
+					{% for movie in pfields %}
+						<tr>
+							<td> {{movie.id}} </td>
+							<td> {{movie.name}} </td>
+						</tr>
+					{% endfor %}
+				</table>
+			</div>
+			<div class="col-md-4">
+			</div>
+		</div>
+	</div>
+{% endblock %}

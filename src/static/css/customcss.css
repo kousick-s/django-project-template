@@ -1,0 +1,65 @@
+.one {
+    border-style: solid;
+    border-width: 3px;
+    border-color: white;
+    vertical-align: middle;
+    height: 80%;
+    width: 80%;
+   
+   vertical-align: middle;
+
+}
+.headalign{
+  vertical-align: middle;
+}
+.glyph {
+    display: block;
+    text-align: center;
+}
+.footerclass{
+  background-color: #2C3E50; 
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+}
+.splbutton{
+  color: #333;
+background-color: #1BDE4B;
+border-color: #1BDE4B;
+font-style: arial;
+
+  
+}
+.galimage{
+  height: 400px;
+  width: 200px;
+}
+.screenimage{
+  padding-left: 30;
+}
+
+.logostyle{height: 50px;
+ }
+  .headdiv{width: 150%}
+.h2c{color:white;}
+.layer5{background-color: #32465b;  width: 100%; padding: 0; margin: 0; padding-top: 30px; padding-bottom: 30px;}
+.layer4{padding-top: 50px;}
+.screenshots{ background-color: #2CC65D; width: 100%; padding: 0; margin: 0; }
+
+.galhead{
+    color: #2BC25B;
+}
+.box1 {
+    display: block;
+    padding: 5px;
+    margin-bottom: 25px; /* SIMPLY SET THIS PROPERTY AS MUCH AS YOU WANT. This changes the space below box1 */
+    text-align: center;
+}
+
+.box2 {
+    display: block;
+    padding: 5px;
+    text-align: center;
+    margin-bottom: 25px; /* OR ADD THIS LINE AND SET YOUR PROPER SPACE as the space above box2 */
+}
