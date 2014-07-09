@@ -10,6 +10,7 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
 from django.views.decorators.csrf import csrf_exempt
 from logilab.common.compat import json
+from django.db.models import Q
 admin.autodiscover()
 # Create your views here.
 
@@ -23,9 +24,8 @@ def page1(request):
     return render_to_response('home.html')
 
 @csrf_exempt
-def savetask(request,user_id):
+def save_task(request,user_id):
     data= json.loads(request.body)
-    print data
     tTitledata = data.get('tTitle')
     tDescdata=data.get('tDesc')
     tStatusdata = data.get('tStatus')
@@ -39,15 +39,14 @@ def savetask(request,user_id):
    
         
 def tasks(request,user_id):
-    #name = request.POST['name']
     userObject=User.objects.get(id=user_id)
     taskObjectPending= Task.objects.filter(user=userObject,tStatus="Pending")
     taskObjectCompleted=Task.objects.filter(user=userObject,tStatus="Completed")
-    return render_to_response('home.html',{'pendingtasks':taskObjectPending,'u_id':user_id,'completedtasks':taskObjectCompleted})
+    taskObjectPublic=Task.objects.filter(~Q(user=userObject),tAccess="public")
+    return render_to_response('home.html',{'completedtasks':taskObjectCompleted,'pendingtasks':taskObjectPending,'u_id':user_id,'publictasks':taskObjectPublic})
 
 
-
-def createuser(request,user_name):
+def create_user(request,user_name):
      user = User.objects.create_user(user_name, 'lennon@thebeatles.com', user_name)
      if user:
          return render_to_response('signup.html',{'status':user})
@@ -67,7 +66,7 @@ def authenticate_user(request):
     else:
     # the authentication system was unable to verify the username and password
         return("in-valid")   
-def newtask(request,user_id):
+def new_task(request,user_id):
     #u_id=request.session['u_id']
     #print u_id
     return render_to_response('createtask.html',{'u_id':user_id})     

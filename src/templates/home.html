@@ -51,7 +51,31 @@
 			</div>
 		</div>
 	</div>
-
-
+	<div class="container">
+		<div class="col-md-4"></div>
+		<div class="col-md-4">
+			<div class="row">
+				<h3>Here are Some Public Tasks...!</h3>
+				<table class="table table-bordered ">
+					<tr>
+						<th>Id</th>
+						<th>User</th>
+						<th>Task Name</th>
+						
+					</tr>
+					{% for Task in publictasks %}
+					<tr>
+						<div class="col-md-4">
+						<td>{{Task.id}}</td>
+						<td>{{Task.user.username}}</td>
+						<td>{{Task.tTitle}}</td>
+						
+					</tr>
+					{% endfor %}
+				</table>
+			</div>
+		</div>
+		<div class="col-md-4">
+		</div>
 
 	{% endblock %}
